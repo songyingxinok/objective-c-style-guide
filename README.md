@@ -35,11 +35,11 @@ Here are some of the documents from Apple that informed the style guide. If some
 * [Notifications](#notifications)
 * [Xcode Project](#xcode-project)
 
-## Dot-Notation Syntax
+## 使用符号"."的语法
 
-Dot-notation should **always** be used for accessing and mutating properties. Bracket notation is preferred in all other instances.
+符号"."应该**总是**用于访问以及修改属性.中括号[]适用于消息传递或者是对方法的访问。
 
-**For example:**  
+**For example:**
 ```objc
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
@@ -51,7 +51,7 @@ view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
-## Spacing
+## 间距
 
 * Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
 * Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
@@ -68,10 +68,10 @@ else {
 * There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
 * `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
 
-## Conditionals
+## 条件语句
 
 Conditional bodies should always use braces even when a conditional body could be written without braces (i.e., it is one line only) braces should still be used. There are just too many little ways to get burned otherwise.
-
+即使条件语句的主体可以不需要大括号"{}"也成立（只需要写一行）,条件语句应该总是使用大括号"{}"。小方法太多了，很容易就引火烧身。
 **For example:**
 ```objc
 if (!error) {
@@ -92,20 +92,29 @@ if (!error) return success;
 ```
 
 ## Methods
+## 方法
 
 In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.  
+在声明方法时，在（-/+ 符号）与方法名之间有一个空格。方法描述变量时，符号":"的前后不应该有无谓的空格。
 
 **For Example**:  
 ```objc  
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
 ## Variables
+## 变量
 
 Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops. 
+变量命名可读性要强，除非使用'for()'循环，否则不要声明单个字母的变量。
 
 Asterisks indicating pointers belong with the variable, i.e. `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
+声明指针时星号应该跟随变量名。例如：使用'NSString *text' 而不是'NSString* text'或者'NSString * text'。
 
 Property definitions should be used in place of naked instance variables whenever possible. Direct instance variable access should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
+
+对于暴露给外部使用的实例变量，除非是在初始化方法中(`init`, `initWithCoder:`, etc…),不然总是应该使用属性。
+对于访问器的更多使用方法，见[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)
+
 
 **For example:**  
 
@@ -124,12 +133,27 @@ Property definitions should be used in place of naked instance variables wheneve
     NSString *headline;
 }
 ```
+还有一种办法是使用匿名类别，私有方法与私有变量可以在".m"文件的匿名类别中实现
+
+**For example:**  
+```objc
+@interface NYTSection(){
+    NSString *footline;
+}
+
+@property (nonatomic) NSString *headline;
+
+@end
+```
+
 
 ## Naming
 
 Apple naming conventions should be adhered to wherever possible, especially those related to [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) (NARC). 
+无论何时都应该采取Apple的命名规范，尤其是那些有关于[memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) (NARC). 的。
 
 Long, descriptive method and variable names are good. 
+好的命名应该是描述性强的，即使它比较长。
 
 **For example:**  
 
@@ -143,32 +167,12 @@ UIButton *settingsButton;
 UIButton *setBut;
 ```
 
-A three letter prefix (e.g. `NYT`) should always be used for class names and constants, however may be omitted for Core Data entity names. Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity. 
-
-**For example:**  
-
-```objc
-static const NSTimeInterval NYTArticleViewControllerNavigationFadeAnimationDuration = 0.3;
-```
-
-**Not:**
-
-```objc
-static const NSTimeInterval fadetime = 1.7;
-```
-
 Properties should be camel-case with the leading word being lowercase. **If Xcode can automatically synthesize the variable, then let it.** Otherwise, in order to be consistent, the backing instance variables for these properties should be camel-case with the leading word being lowercase and a leading underscore. This is the same format as Xcode's default synthesis.
-
+属性的命名应该采取驼峰式，在Xcode支持自动合成方法的前情况下，不使用 @synthesize 。
 **For example:**  
 
 ```objc
 @synthesize descriptiveVariableName = _descriptiveVariableName;
-```
-
-**Not:**
-
-```objc
-id varnm;
 ```
 
 ### Underscores
