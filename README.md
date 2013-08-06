@@ -70,7 +70,7 @@ else {
 
 ## 条件语句
 
-即使条件语句的主体可以不需要大括号"{}"也成立（只需要写一行）,条件语句应该总是使用大括号"{}"。小方法太多了，很容易就引火烧身。
+即使条件语句的主体可以不需要大括号"{}"也成立（只需要写一行）,条件语句应该总是使用大括号"{}"。
 
 **For example:**
 ```objc
@@ -103,7 +103,7 @@ if (!error) return success;
 
 变量命名可读性要强，除非使用'for()'循环，否则不要声明单个字母的变量。
 
-声明指针时星号应该跟随变量名。例如：使用'NSString *text' 而不是'NSString* text'或者'NSString * text'。
+声明指针时星号应该跟随变量名。例如：使用`NSString *text`而不是`NSString* text`或者`NSString * text`。
 
 对于暴露给外部使用的实例变量，除非是在初始化方法中(`init`, `initWithCoder:`, etc…),不然总是应该使用属性。
 对于访问器的更多使用方法，见[这里](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)
