@@ -266,7 +266,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 ## Private Properties
 
 Private properties should be declared in class extensions (anonymous categories) in the implementation file of a class. Named categories (such as `NYTPrivate` or `private`) should never be used unless extending another class.
-
+私有属性应该在扩展类中声明。
 **For example:**  
 
 ```objc
